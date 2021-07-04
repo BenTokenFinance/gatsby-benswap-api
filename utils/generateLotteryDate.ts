@@ -1,3 +1,5 @@
+// TODO: update start date and intervals
+
 export const firstLottery = new Date(Date.UTC(2021, 3, 30, 14, 0, 0, 0)); // Time of the first Offical Lottery; There are 3 Tests lotteries
 export const numberOfTestLotteries = 0;
 const hour = 60 * 60 * 1000;

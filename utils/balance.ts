@@ -3,7 +3,6 @@ import BigNumber from "bignumber.js";
 import bep20ABI from "./abis/bep20.json";
 import pairABI from "./abis/pair.json";
 import masterChefABI from "./abis/masterchef.json";
-import smartChefABI from "./abis/smartchef.json";
 import { getContract, getWeb3 } from "./web3";
 import { CAKE, CAKE_BNB_FARM, CAKE_BNB_TOKEN, CAKE_TOKEN, MASTERCHEF_CONTRACT, WBNB_TOKEN } from "./constants";
 import { pools } from "./pools";
@@ -20,16 +19,16 @@ export const getTotalStaked = async (address: string, block: string): Promise<nu
   let balance = new BigNumber(0);
 
   try {
-    // Cake balance in wallet.
+    // GBEN balance in wallet.
     const cakeContract = getContract(bep20ABI, CAKE, true);
     const cakeBalance = await cakeContract.methods.balanceOf(address).call(undefined, blockNumber);
     balance = balance.plus(cakeBalance);
   } catch (error) {
-    console.error(`CAKE balance error: ${error}`);
+    console.error(`GBEN balance error: ${error}`);
   }
 
   try {
-    // CAKE-BNB farm.
+    // GBEN-BNB farm.
     const masterContract = getContract(masterChefABI, MASTERCHEF_CONTRACT, true);
     const cakeBnbContract = getContract(pairABI, CAKE_BNB_FARM, true);
     const totalSupplyLP = await cakeBnbContract.methods.totalSupply().call(undefined, blockNumber);
@@ -49,37 +48,20 @@ export const getTotalStaked = async (address: string, block: string): Promise<nu
     );
     balance = balance.plus(new BigNumber(cakeLPBalance.toSignificant(18)).times(1e18));
   } catch (error) {
-    console.error(`CAKE-BNB LP error: ${error}`);
+    console.error(`GBEN-BNB LP error: ${error}`);
   }
 
+  // TODO: Add other GBEN pairs
+
   try {
-    // MasterChef contract.
+    // MasterBreeder contract.
     const masterContract = getContract(masterChefABI, MASTERCHEF_CONTRACT, true);
     const cakeMainStaking: UserInfoResult = await masterContract.methods
-      .userInfo(0, address)
+      .userInfo(7, address)
       .call(undefined, blockNumber);
     balance = balance.plus(cakeMainStaking.amount);
   } catch (error) {
     console.error(`MasterChef error: ${error}`);
-  }
-
-  try {
-    // Pools balances.
-    const poolsFiltered = pools.filter((pool) => blockNumber >= pool.startBlock && blockNumber <= pool.endBlock);
-    const calls = poolsFiltered.map((pool) => ({
-      address: pool.address,
-      name: "userInfo",
-      params: [address],
-    }));
-    const userInfo = await multicall(smartChefABI, calls, blockNumber);
-    const balancesMapping = userInfo.reduce(
-      (acc: BigNumber, result: UserInfoResult) => acc.plus(new BigNumber(result.amount._hex)),
-      new BigNumber(0)
-    );
-
-    balance = balance.plus(balancesMapping);
-  } catch (error) {
-    console.error(`Pools error: ${error}`);
   }
 
   return balance.div(1e18).toNumber();
