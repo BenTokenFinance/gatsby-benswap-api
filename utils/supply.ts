@@ -16,5 +16,5 @@ export const getBurnedSupply = async (): Promise<BigNumber> => {
   const balance2 = await contract.methods.balanceOf(CAKE).call();
   const balance3 = await contract.methods.balanceOf(BLACKHOLE).call();
 
-  return new BigNumber(balance1).add(new BigNumber(balance2)).add(new BigNumber(balance3));
+  return (new BigNumber(balance1)).plus(new BigNumber(balance2)).plus(new BigNumber(balance3));
 };
