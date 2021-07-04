@@ -1,6 +1,6 @@
-# panther-api
+# benswap-api
 
-Set of endpoints utilities for PantherSwap, based on Serverless.
+Set of endpoints utilities for BenSwap, based on Serverless.
 
 ## Dependencies
 

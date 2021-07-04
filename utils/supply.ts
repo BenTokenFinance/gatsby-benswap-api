@@ -1,6 +1,6 @@
 import BigNumber from "bignumber.js";
 import { getContract } from "./web3";
-import { CAKE, DEAD } from "./constants";
+import { CAKE, DEAD, BLACKHOLE } from "./constants";
 import bep20 from "./abis/bep20.json";
 
 const contract = getContract(bep20, CAKE);
@@ -12,7 +12,9 @@ export const getTotalSupply = async (): Promise<BigNumber> => {
 };
 
 export const getBurnedSupply = async (): Promise<BigNumber> => {
-  const balance = await contract.methods.balanceOf(DEAD).call();
+  const balance1 = await contract.methods.balanceOf(DEAD).call();
+  const balance2 = await contract.methods.balanceOf(CAKE).call();
+  const balance3 = await contract.methods.balanceOf(BLACKHOLE).call();
 
-  return new BigNumber(balance);
+  return new BigNumber(balance1).add(new BigNumber(balance2)).add(new BigNumber(balance3));
 };

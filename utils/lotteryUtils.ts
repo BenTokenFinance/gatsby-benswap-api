@@ -127,36 +127,20 @@ export const getIssueIndex = async (): Promise<number | { error: string; errorMe
 };
 
 export const getTicketPrice = (index: number): number => {
-  if (index <= 4) {
-    return 20;
-  }
-
-  return 5;
+  return 50;
 };
 
 /**
  * @param index
  */
 export const getRates = (index: number): Rates => {
-  // if (index >= 0 && index <= 205) {
-  //   return ratesV1;
-  // } else if ((index >= 206 && index <= 348) || index >= 356) {
-  //   return ratesV2;
-  // }
-
-  if (index >= 0) {
-    return ratesV2;
-  }
-
   return ratesV2;
 };
 
 export const getAllLotteries = (issueIndex: number): Promise<Array<Lottery>> => {
   const finalNumbersProm: Array<SingleLotteryReturn> = [];
   for (let i = issueIndex; i >= 0; i--) {
-    if (i !== 349) {
-      finalNumbersProm.push(getSingleLotteryBatch(i));
-    }
+    finalNumbersProm.push(getSingleLotteryBatch(i));
   }
   return computeLotteries(finalNumbersProm);
 };
