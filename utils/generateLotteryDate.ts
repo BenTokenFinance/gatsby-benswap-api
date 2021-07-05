@@ -1,19 +1,16 @@
 // TODO: update start date and intervals
 
-export const firstLottery = new Date(Date.UTC(2021, 3, 30, 14, 0, 0, 0)); // Time of the first Offical Lottery; There are 3 Tests lotteries
-export const numberOfTestLotteries = 0;
+export const firstLottery = new Date(Date.UTC(2021, 7, 4, 4, 36, 23, 0)); 
+export const secondLottery = new Date(Date.UTC(2021, 7, 5, 4, 36, 23, 0));   // To be modified later
+export const thirdLottery = new Date(Date.UTC(2021, 7, 8, 2, 0, 0, 0)); 
+export const numberOfTestLotteries = 2;
 const hour = 60 * 60 * 1000;
 export const generateLotteryDate = (issueIndex: number): Date => {
-  const lotteryDate = new Date(firstLottery);
-  // if (issueIndex < 48) {
-  lotteryDate.setTime(lotteryDate.getTime() + (issueIndex - numberOfTestLotteries) * 12 * hour);
-  // } else if (issueIndex < 225) {
-  //   lotteryDate.setTime(lotteryDate.getTime() + (48 - numberOfTestLotteries) * 2 * hour);
-  //   lotteryDate.setTime(lotteryDate.getTime() + (issueIndex - 47) * 6 * hour);
-  // } else {
-  //   lotteryDate.setTime(lotteryDate.getTime() + (48 - numberOfTestLotteries) * 2 * hour);
-  //   lotteryDate.setTime(lotteryDate.getTime() + (225 - 48) * 6 * hour);
-  //   lotteryDate.setTime(lotteryDate.getTime() + (issueIndex - 224 + numberOfTestLotteries) * 12 * hour);
-  // }
+  if (issueIndex == 0) return  new Date(firstLottery);
+  else if (issueIndex == 1) return  new Date(secondLottery);
+  const lotteryDate = new Date(thirdLottery);
+
+  lotteryDate.setTime(lotteryDate.getTime() + (issueIndex - numberOfTestLotteries) * 36 * hour);
+  
   return lotteryDate;
 };
