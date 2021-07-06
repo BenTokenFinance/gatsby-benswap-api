@@ -36,6 +36,7 @@ export interface SingleLottery {
 export interface LotteryHistory {
   lotteryNumber: number;
   poolSize: number;
+  won: number;
   burned: number;
 }
 

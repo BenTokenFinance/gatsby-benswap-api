@@ -20,6 +20,7 @@ export const lotteryHistory = async (): Promise<
       return {
         lotteryNumber: x.issueIndex,
         poolSize: ceilDecimal(x.numbers2[0], 2),
+        won: ceilDecimal(x.numbers2[1] + x.numbers2[2] + x.numbers2[3], 2),
         burned: ceilDecimal((x.numbers2[0] / 100) * getRates(x.issueIndex).burn, 2),
       };
     }
