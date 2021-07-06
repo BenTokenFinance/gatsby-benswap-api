@@ -17,11 +17,16 @@ export const lotteryHistory = async (): Promise<
   const allLotteries = await getAllLotteries(issueIndex - 1);
   const history: Array<LotteryHistory> = allLotteries.map(
     (x): LotteryHistory => {
+      const rate = getRates(x.issueIndex);
       return {
         lotteryNumber: x.issueIndex,
         poolSize: ceilDecimal(x.numbers2[0], 2),
-        won: ceilDecimal(x.numbers2[1] + x.numbers2[2] + x.numbers2[3], 2),
-        burned: ceilDecimal((x.numbers2[0] / 100) * getRates(x.issueIndex).burn, 2),
+        won: ceilDecimal(
+          x.numbers2[1]>0? (x.numbers2[0] / 100) * rate.jackpot : 0 + 
+          x.numbers2[2]>0? (x.numbers2[0] / 100) * rate.match3 : 0 + 
+          x.numbers2[3]>0? (x.numbers2[0] / 100) * rate.match2 : 0 
+        , 2),
+        burned: ceilDecimal((x.numbers2[0] / 100) * rate.burn, 2),
       };
     }
   );
