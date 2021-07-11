@@ -12,7 +12,7 @@ export const generateLotteryDate = (issueIndex: number): Date => {
   else if (issueIndex == 2) return  new Date(thirdLottery);
   const lotteryDate = new Date(forthLottery);
 
-  lotteryDate.setTime(lotteryDate.getTime() + (issueIndex - numberOfTestLotteries) * 36 * hour);
+  lotteryDate.setTime(lotteryDate.getTime() + (issueIndex - numberOfTestLotteries) * 72 * hour);
   
   return lotteryDate;
 };
