@@ -22,9 +22,9 @@ export const lotteryHistory = async (): Promise<
         lotteryNumber: x.issueIndex,
         poolSize: ceilDecimal(x.numbers2[0], 2),
         won: ceilDecimal(
-          x.numbers2[1]>0? (x.numbers2[0] / 100) * rate.jackpot : 0 + 
-          x.numbers2[2]>0? (x.numbers2[0] / 100) * rate.match3 : 0 + 
-          x.numbers2[3]>0? (x.numbers2[0] / 100) * rate.match2 : 0 
+          (x.numbers2[1]>0? (x.numbers2[0] / 100) * rate.jackpot : 0) + 
+          (x.numbers2[2]>0? (x.numbers2[0] / 100) * rate.match3 : 0) + 
+          (x.numbers2[3]>0? (x.numbers2[0] / 100) * rate.match2 : 0)
         , 2),
         burned: ceilDecimal((x.numbers2[0] / 100) * rate.burn, 2),
       };
