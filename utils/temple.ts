@@ -18,7 +18,7 @@ export const getMeritList = async (): Promise<Array<Worship>> => {
     const templeContract = getContract(templeABI, TEMPLE_CONTRACT);
     let block = await getLatestBlock();
 
-    const batch = new PromisifyBatchRequest<string>();
+    const batch = new PromisifyBatchRequest<any>();
 
     while (block > START_BLOCK) {
         batch.add(templeContract.getPastEvents("Worship", {                               
@@ -28,7 +28,7 @@ export const getMeritList = async (): Promise<Array<Worship>> => {
         block -= BLOCK_RANGE;
     }
 
-    const res = await (batch.execute() as Promise<[any]>);
+    const res = await (batch.execute() as Promise<Array<any>>);
     return res.sort((a,b) => b.returnValues.amount-a.returnValues.amount).slice(0,20).map(ev => { return {
         ...ev.returnValues, 
         block: ev.blockNumber,
