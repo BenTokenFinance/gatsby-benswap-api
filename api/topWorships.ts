@@ -6,6 +6,6 @@ export default async (req: NowRequest, res: NowResponse): Promise<void> => {
     const data = await getMeritList();
     res.status(200).send(data);
   } catch (error) {
-    res.status(500).send({ error: "internal server error" });
+    res.status(500).send({ error: error });
   }
 };
