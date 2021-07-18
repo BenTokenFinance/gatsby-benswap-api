@@ -25,7 +25,9 @@ export const getMeritList = async (): Promise<any[]> => {
     return res.reduce((a,c)=>{
         return a.concat(c).sort((x,y) => y.returnValues.amount-x.returnValues.amount).slice(0,20);
     }).map(ev => { return {
-        ...ev.returnValues, 
+        user: ev.returnValues.user,
+        amount: ev.returnValues.amount,
+        prayer: ev.returnValues.prayer,
         block: ev.blockNumber,
         tx: ev.transactionHash
     }})
@@ -50,7 +52,9 @@ export const getRecentWorships = async (): Promise<any[]> => {
     return res.reduce((a,c)=>{
         return a.concat(c).sort((x,y) => y.blockNumber-x.blockNumber).slice(0,20);
     }).map(ev => { return {
-        ...ev.returnValues, 
+        user: ev.returnValues.user,
+        amount: ev.returnValues.amount,
+        prayer: ev.returnValues.prayer,
         block: ev.blockNumber,
         tx: ev.transactionHash
     }})
