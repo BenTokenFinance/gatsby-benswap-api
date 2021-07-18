@@ -48,7 +48,7 @@ export const getRecentWorships = async (): Promise<any[]> => {
 
     const res = await Promise.all(batch);
     return res.reduce((a,c)=>{
-        return a.concat(c).sort((x,y) => y.returnValues.amount-x.returnValues.amount).slice(0,20);
+        return a.concat(c).sort((x,y) => y.blockNumber-x.blockNumber).slice(0,20);
     }).map(ev => { return {
         ...ev.returnValues, 
         block: ev.blockNumber,
