@@ -33,5 +33,5 @@ export const getMeritList = async (): Promise<Array<Worship>> => {
         ...ev.returnValues, 
         block: ev.blockNumber,
         tx: ev.transactionHash
-    }})
+    } as Worship})
 };
