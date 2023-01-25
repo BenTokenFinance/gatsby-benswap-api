@@ -1,5 +1,5 @@
 import { PromisifyBatchRequest } from "../lib/PromiseBatchRequest";
-import { ratesV2, ratesV1, rates, Rates } from "./lotteryRates";
+import { ratesV2, Rates } from "./lotteryRates";
 import { LOTTERY_CONTRACT } from "./constants";
 import { getContract } from "./web3";
 import lotteryABI from "./abis/lottery.json";
