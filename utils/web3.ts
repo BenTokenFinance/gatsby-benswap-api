@@ -1,9 +1,7 @@
 import Web3 from "web3";
 
 const BSC_NODE_RPC = [
-  "https://bsc-dataseed.binance.org/",
-  "https://bsc-dataseed1.defibit.io/",
-  "https://bsc-dataseed1.ninicoin.io/",
+  "https://go.getblock.io/62d5fb3e97ef45d2a89b80db3be41929/"
 ];
 
 const BSC_ARCHIVE_NODE_RPC = [
