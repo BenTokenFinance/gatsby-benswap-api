@@ -1,14 +1,11 @@
 import Web3 from "web3";
 
 const BSC_NODE_RPC = [
-  "https://go.getblock.io/62d5fb3e97ef45d2a89b80db3be41929/"
+  "https://rpc.ankr.com/bsc/3e2f2ba3bd16222a04dd42e1662458647bcdadefaec664149d20438292db76c8"
 ];
 
 const BSC_ARCHIVE_NODE_RPC = [
-  "https://bsc-private-dataseed1.nariox.org/",
-  "https://bsc-private-dataseed3.nariox.org/",
-  "https://bsc-private-dataseed4.nariox.org/",
-  "https://bsc-private-dataseed5.nariox.org/",
+  "https://rpc.ankr.com/bsc/3e2f2ba3bd16222a04dd42e1662458647bcdadefaec664149d20438292db76c8",
 ];
 
 export const getWeb3 = (archive = false): Web3 => {
