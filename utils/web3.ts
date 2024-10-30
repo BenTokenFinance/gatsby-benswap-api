@@ -1,7 +1,7 @@
 import Web3 from "web3";
 
 const BSC_NODE_RPC = [
-  "https://go.getblock.io/62d5fb3e97ef45d2a89b80db3be41929/"
+  "https://rpc.ankr.com/bsc/b20788728fdcd8c532fb9a99e30297830f54c0f49431925350b5116f7c94d08e"
 ];
 
 const BSC_ARCHIVE_NODE_RPC = [
